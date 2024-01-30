@@ -52,4 +52,4 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.token);
-keepAlive();
+keep_alive();
