@@ -2,10 +2,20 @@ const { data } = require("./supporting files/combine-embeds.js");
 const { addRoles } = require("./supporting files/addroles.js");
 const { ComponentType } = require("discord.js");
 
+let trigger = true;
+
 module.exports.survey = (interaction) => {
+
   if (interaction.customId !== "begin") return;
 
-  if (interaction.member.roles.cache.has("934790971131039745")) {
+  let roleId;
+  if (interaction.guild.name == "My server") {
+    roleId = "1201306011957481492";
+  } else if (interaction.guild.name == "HKLB") {
+    roleId = "934790971131039745";
+  }
+
+  if (interaction.member.roles.cache.has(roleId)) {
     interaction.reply({
       ephemeral: true,
       embeds: [
@@ -19,7 +29,7 @@ module.exports.survey = (interaction) => {
     return;
   }
 
-  let trigger = true;
+
   if (trigger == true) {
     trigger = false;
     interaction.reply({
