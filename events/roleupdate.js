@@ -12,7 +12,7 @@ module.exports = {
       const targetRoleID = "1201306011957481492";
 
       if (addedRoles.has(targetRoleID)) {
-        const threadChannelIDs = ["1201276700386934914", "1201492402146390088"]; // change this tot he threads you want to add memeber to
+        const threadChannelIDs = ["1201276700386934914", "1201492402146390088"]; // change this tot he threads you want to add member to
 
         for (i = 0; i < threadChannelIDs.length; i++) {
           // Fetch the thread channel

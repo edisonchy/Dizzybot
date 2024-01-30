@@ -1,5 +1,6 @@
 const { Events } = require('discord.js');
-const { button } = require('../misc_files/button')
+const { button } = require('../misc_files/button');
+const { survey } = require('../misc_files/survey/survey.js');
 
 module.exports = {
 	name: Events.InteractionCreate,
@@ -7,7 +8,8 @@ module.exports = {
 		if (!interaction.isChatInputCommand() && !interaction.isButton()) return;
 
     if (interaction.isButton()) {
-      await button(interaction);
+      button(interaction);
+      survey(interaction);
     }
 
     if (interaction.isChatInputCommand()) {

@@ -30,7 +30,8 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     const channel = interaction.options.getChannel("channel");
-    let sendChannel = await channel.send({
+    try {
+    await channel.send({
       embeds: [Embed],
       components: [
         new ActionRowBuilder().setComponents(
@@ -56,17 +57,17 @@ module.exports = {
             .setStyle(ButtonStyle.Link)
         ),
       ],
-    });
-    if (!sendChannel) {
-      return await interaction.reply({
-        content: "Error! Try again later.",
-        ephemeral: true,
       });
-    } else {
-      return await interaction.reply({
+      await interaction.reply({
         content: "Success! Embed sent.",
         ephemeral: true,
       });
+    } catch (e) {
+      await interaction.reply({
+        content: "Error! Try again later.",
+        ephemeral: true,
+      });
+      console.error(e);
     }
   },
 };

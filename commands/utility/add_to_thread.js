@@ -14,7 +14,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const threadId = interaction.options.getString("thread_id");
-    const roleId = "1201306011957481492"; // Edit this
+    const roleId = "934790971131039745"; // Edit this 1201306011957481492 934790971131039745
 
     try {
       // Fetch the thread using the given ID
