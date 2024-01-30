@@ -2,6 +2,7 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 let intId = undefined;
 let timId = undefined;
+let triggered = false;
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -81,7 +82,7 @@ module.exports = {
     async function interactionReply(interaction, embed, intId) {
       let channel;
       let channelId;
-
+      
       if (interaction.guild.name == "My server") {
         channelId = "1201276567419097159";
       } else if (interaction.guild.name == "HKLB") {
@@ -95,6 +96,7 @@ module.exports = {
         const channel = await interaction.guild.channels.fetch(interaction.channelId);
         await interaction.editReply({ content: "channel does not exist.", ephemeral: true});
         clearInterval(intId);
+        triggered = false;
       }
 
       if (channel) {
@@ -127,11 +129,13 @@ module.exports = {
 
 		const option = interaction.options.getString('option');
     if (option == 'start_interval') {
-      try {
-        await interaction.reply({ content: "started.", ephemeral: true});
-      } catch (e) {
-        console.error(e);
+      if (triggered == true) {
+        await interaction.reply({ content: "instance already started.", ephemeral: true});
+        return;
       }
+
+      triggered = true;
+      await interaction.reply({ content: "started.", ephemeral: true});
 
       timId = setTimeout(() => {
         intId = setInterval(() => {
@@ -148,16 +152,17 @@ module.exports = {
       if (timId && intId == undefined) {
         clearTimeout(timId);
         timId = undefined;
+        triggered = false;
         await interaction.reply({ content: "Ended Timeout.", ephemeral: true})
       } else if (intId) {
         clearInterval(intId);
         intId = undefined;
         timId = undefined;
+        triggered = false;
         await interaction.reply({ content: "Ended Interval.", ephemeral: true})
       } else if (intId == undefined && timId == undefined) {
         await interaction.reply({ content: "Nothing to end.", ephemeral: true});
       }
     }
-
 	},
 };
