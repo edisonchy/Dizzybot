@@ -29,5 +29,3 @@ module.exports.emb4 = {
 		text: 'Question (3/4)'
 	}
 };
-
-//add no experience

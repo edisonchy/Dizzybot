@@ -2,11 +2,6 @@ const { data } = require("./supporting files/combine-embeds.js");
 const { addRoles } = require("./supporting files/addroles.js");
 const { ComponentType } = require("discord.js");
 
-let trigger = true;
-let count = 0;
-let list = [];
-let finished = false;
-
 module.exports.survey = (interaction) => {
   if (interaction.customId !== "begin") return;
 
@@ -24,6 +19,7 @@ module.exports.survey = (interaction) => {
     return;
   }
 
+  let trigger = true;
   if (trigger == true) {
     trigger = false;
     interaction.reply({
@@ -41,6 +37,8 @@ module.exports.survey = (interaction) => {
     time: 60000,
   });
 
+  let count = 0;
+  let list = [];
   collector.on("collect", async (i) => {
     if (!i.isButton()) return;
 
@@ -136,7 +134,8 @@ module.exports.survey = (interaction) => {
         break;
     }
   });
-
+  
+  let finished = false;
   collector.on("end", (c) => {
     if (list.length !== 4 && finished == false) {
       interaction.editReply({

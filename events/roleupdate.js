@@ -9,10 +9,20 @@ module.exports = {
 
     if (addedRoles.size > 0) {
       // Check if the added role has a specific ID
-      const targetRoleID = "1201306011957481492";
+      let targetRoleID;
+      if (interaction.guild.name == "My server") {
+        targetRoleID = "1201306011957481492";
+      } else if (interaction.guild.name == "HKLB") {
+        targetRoleID = "934790971131039745";
+      }
 
       if (addedRoles.has(targetRoleID)) {
-        const threadChannelIDs = ["1201276700386934914", "1201492402146390088"]; // change this tot he threads you want to add member to
+        let threadChannelIDs;
+        if (interaction.guild.name == "My server") {
+          threadChannelIDs = ["1201276700386934914", "1201492402146390088"];
+        } else if (interaction.guild.name == "HKLB") {
+          threadChannelIDs = ["1089709495434870785", "1089710323113672714", "1096424382986981386"];
+        } 
 
         for (i = 0; i < threadChannelIDs.length; i++) {
           // Fetch the thread channel

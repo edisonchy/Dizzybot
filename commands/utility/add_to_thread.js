@@ -14,7 +14,21 @@ module.exports = {
     ),
   async execute(interaction) {
     const threadId = interaction.options.getString("thread_id");
-    const roleId = "934790971131039745"; // Edit this 1201306011957481492 934790971131039745
+    let roleId;
+    
+    if (interaction.guild.name == "My server") {
+      roleId = "1201306011957481492";
+    } else if (interaction.guild.name == "HKLB") {
+      roleId = "934790971131039745";
+    } // Edit this 1201306011957481492 934790971131039745
+
+    if (!interaction.guild.roles.cache.has(roleId)) {
+      await interaction.reply({
+        content: "Role not found.",
+        ephemeral: true,
+      });
+      return;
+    }
 
     try {
       // Fetch the thread using the given ID
@@ -28,7 +42,7 @@ module.exports = {
         );
 
         const threadMembers = await thread.members.fetch();
-        var nothingEdited = true;
+        let nothingEdited = true;
 
         for (const member of membersWithRole.values()) {
           // Check if the member is not already in the thread
@@ -46,22 +60,26 @@ module.exports = {
             }
           }
         }
-        
+
         if (nothingEdited) {
-          await interaction.reply(
-            "All members with the specified role are already in the thread."
-          );
+          await interaction.reply({
+            content:
+              "Members with the specified role are already in the thread.",
+            ephemeral: true,
+          });
         } else {
-          await interaction.reply(
-            "Added members with the specified role to the thread."
-          );
+          await interaction.reply({
+            content: "Members with the specified role added to the thread.",
+            ephemeral: true,
+          });
         }
       }
     } catch (error) {
       console.error("Error fetching the thread:", error);
-      await interaction.reply(
-        "Error fetching the thread. Please check the thread ID."
-      );
+      await interaction.reply({
+        content: "Error fetching the thread. Please check the thread ID.",
+        ephemeral: true,
+      });
     }
   },
 };
