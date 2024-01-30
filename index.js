@@ -1,3 +1,4 @@
+const keepAlive = require('./server');
 const dotenv = require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
@@ -51,3 +52,4 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.token);
+keepAlive();
