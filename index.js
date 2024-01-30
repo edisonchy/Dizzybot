@@ -1,4 +1,4 @@
-const keepAlive = require('./server');
+const keep_alive = require('./keep_alive.js')
 const dotenv = require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
