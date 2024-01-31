@@ -74,11 +74,11 @@ module.exports = {
         fields: [
           {
             name: `*星期六 ${r[0].date}*`,
-            value: `平均氣溫：${r[0].["avg temp"]}°C\n最高氣溫：${r[0]["max temp"]}°C\n最低氣溫：${r[0]["min temp"]}°C\n日出：${r[0].sunrise}\n日落：${r[0].sunset}\n落雨機率：${r[0]["chance of rain"]}%\n天氣概況：${r[0].condition}`,
+            value: `平均氣溫：${r[0]["avg temp"]}°C\n最高氣溫：${r[0]["max temp"]}°C\n最低氣溫：${r[0]["min temp"]}°C\n日出：${r[0].sunrise}\n日落：${r[0].sunset}\n落雨機率：${r[0]["chance of rain"]}%\n天氣概況：${r[0].condition}`,
           },
           {
             name: `*星期日 ${r[1].date}*`,
-            value: `平均氣溫：${r[0].["avg temp"]}°C\n最高氣溫：${r[0]["max temp"]}°C\n最低氣溫：${r[0]["min temp"]}°C\n日出：${r[0].sunrise}\n日落：${r[0].sunset}\n落雨機率：${r[0]["chance of rain"]}%\n天氣概況：${r[0].condition}`,
+            value: `平均氣溫：${r[0]["avg temp"]}°C\n最高氣溫：${r[0]["max temp"]}°C\n最低氣溫：${r[0]["min temp"]}°C\n日出：${r[0].sunrise}\n日落：${r[0].sunset}\n落雨機率：${r[0]["chance of rain"]}%\n天氣概況：${r[0].condition}`,
           },
         ],
       };
