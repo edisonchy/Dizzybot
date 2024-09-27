@@ -5,6 +5,11 @@ module.exports = {
     .setName("ping")
     .setDescription("Replies with Pong!"),
   async execute(interaction) {
-    await interaction.reply({ content: "Pong!", ephemeral: true });
+    if (!interaction.guild) {
+      await interaction.reply("吔蕉啦你🍌");
+      return;
+    }
+
+    await interaction.reply("Pong!");
   },
 };
