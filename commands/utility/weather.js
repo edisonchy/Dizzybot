@@ -63,20 +63,16 @@ module.exports = {
     try {
       const page = await browser.newPage();
 
-      // Navigate to the weather URL
       await page.goto(url, {
         waitUntil: "networkidle0",
         timeout: 60000,
       });
 
-      // Set screen size
       await page.setViewport({ width: 1080, height: 1024 });
 
-      // Take a screenshot
       const screenshotPath = "weather_screenshot.png";
       await page.screenshot({ path: screenshotPath });
 
-      // Create attachment and embed
       const file = new AttachmentBuilder(screenshotPath, { name: "weather_screenshot.png" }); 
 
       const embed = new EmbedBuilder()
@@ -85,10 +81,8 @@ module.exports = {
         .setImage("attachment://weather_screenshot.png") 
         .setColor(0xffffff);
 
-      // Send the embed with the attached image
       await interaction.editReply({ embeds: [embed], files: [file] });
 
-      // Delete the screenshot file after sending
       fs.unlinkSync(screenshotPath);
     } catch (e) {
       console.error(e);

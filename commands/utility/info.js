@@ -61,7 +61,7 @@ module.exports = {
       {
         title: "**重要連結**",
         color: 16777215,
-        description: "網店\n[打開連結](https://sbdwlongboards.com/pages/booking)\n\nInstagram\n [打開連結](https://www.instagram.com/sbdwlongboards/)\n\nYoutube\n[打開連結](https://www.youtube.com/user/sbdwlongboardshop)\n\nFacebook \n[打開連結](https://www.facebook.com/sbdwlongboards)\n\nLinktree\n[打開連結](https://linktr.ee/sbdwlongboards)",
+        description: "網店\n[打開連結](https://sbdwlongboards.com/pages/booking)\n\nInstagram\n[打開連結](https://www.instagram.com/sbdwlongboards/)\n\nYoutube\n[打開連結](https://www.youtube.com/user/sbdwlongboardshop)\n\nFacebook \n[打開連結](https://www.facebook.com/sbdwlongboards)\n\nLinktree\n[打開連結](https://linktr.ee/sbdwlongboards)",
         image: {
           url: "https://media.discordapp.net/attachments/1288529206317158490/1289306715006701598/Copy_of_Untitled_Design_6.png?ex=66f857f3&is=66f70673&hm=8f1be57edc3e59366753e9f66718315c1a5c3d58a6e740763d619e1d553a20c3&=&format=webp&quality=lossless&width=932&height=700"
         }
