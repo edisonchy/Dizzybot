@@ -56,10 +56,7 @@ module.exports = {
           "--single-process",
           "--no-zygote",
         ],
-        executablePath:
-          process.env.NODE_ENV === "production"
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath(),
+        executablePath: puppeteer.executablePath(),
       });
 
       const page = await browser.newPage();
