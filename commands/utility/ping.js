@@ -10,6 +10,6 @@ module.exports = {
       return;
     }
 
-    await interaction.reply("Pong!");
+    await interaction.reply("Ping你老味");
   },
 };

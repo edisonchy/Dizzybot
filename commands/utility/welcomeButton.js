@@ -44,7 +44,7 @@ module.exports = {
       });
     } catch (e) {
       await interaction.reply({
-        content: "Error! Fuck off retard.",
+        content: "Error! Kindly remove yourself from the premises.",
         ephemeral: true,
       });
       console.error(e);

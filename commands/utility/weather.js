@@ -1,6 +1,20 @@
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const puppeteer = require("puppeteer");
-const fs = require("fs");
+
+const LOCATIONS = {
+  yuen_long: {
+    name: "元朗",
+    url: "https://www.windy.com/multimodel/22.443/114.028?waves,22.438,114.033,15",
+  },
+  fo_tan: {
+    name: "火炭",
+    url: "https://www.windy.com/multimodel/22.396/114.196?waves,22.393,114.195,16",
+  },
+  hong_kong_island: {
+    name: "香港島",
+    url: "https://www.windy.com/multimodel/22.283/114.157?waves,22.265,114.175,14",
+  },
+};
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,70 +39,63 @@ module.exports = {
     }
 
     await interaction.deferReply();
-    const location = interaction.options.getString("location");
-    let url = "";
-    let name = "";
 
-    switch (location) {
-      case "yuen_long":
-        url =
-          "https://www.windy.com/multimodel/22.443/114.028?waves,22.438,114.033,15";
-        name = "元朗";
-        break;
-      case "fo_tan":
-        url =
-          "https://www.windy.com/multimodel/22.396/114.196?waves,22.393,114.195,16";
-        name = "火炭";
-        break;
-      case "hong_kong_island":
-        url =
-          "https://www.windy.com/multimodel/22.283/114.157?waves,22.265,114.175,14";
-        name = "香港島";
-        break;
+    const locationKey = interaction.options.getString("location");
+    const selected = LOCATIONS[locationKey];
+    if (!selected) {
+      await interaction.editReply("Invalid location.");
+      return;
     }
 
-    const browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
-      executablePath:
-        process.env.NODE_ENV === "production"
-          ? process.env.PUPPETEER_EXECUTABLE_PATH
-          : puppeteer.executablePath(),
-    });
-
+    let browser;
     try {
-      const page = await browser.newPage();
+      browser = await puppeteer.launch({
+        args: [
+          "--disable-setuid-sandbox",
+          "--no-sandbox",
+          "--single-process",
+          "--no-zygote",
+        ],
+        executablePath:
+          process.env.NODE_ENV === "production"
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath(),
+      });
 
-      await page.goto(url, {
+      const page = await browser.newPage();
+      // Set viewport before navigation for consistency
+      await page.setViewport({ width: 1080, height: 1024 });
+
+      await page.goto(selected.url, {
         waitUntil: "networkidle0",
         timeout: 60000,
       });
 
-      await page.setViewport({ width: 1080, height: 1024 });
+      // Take screenshot directly to buffer (no temp files)
+      const pngBuffer = await page.screenshot({ type: "png" });
 
-      const screenshotPath = "weather_screenshot.png";
-      await page.screenshot({ path: screenshotPath });
-
-      const file = new AttachmentBuilder(screenshotPath, { name: "weather_screenshot.png" }); 
+      const file = new AttachmentBuilder(pngBuffer, { name: "weather.png" });
 
       const embed = new EmbedBuilder()
         .setTitle("Windy 天氣報告")
-        .setDescription("地點：" + name)
-        .setImage("attachment://weather_screenshot.png") 
+        .setDescription(`地點：${selected.name}`)
+        .setImage("attachment://weather.png")
         .setColor(0xffffff);
 
       await interaction.editReply({ embeds: [embed], files: [file] });
-
-      fs.unlinkSync(screenshotPath);
     } catch (e) {
-      console.error(e);
-      await interaction.editReply("吔蕉啦你🍌");
+      console.error("[/weather] error:", e);
+      if (interaction.deferred || interaction.replied) {
+        await interaction.editReply("吔蕉啦你🍌");
+      } else {
+        await interaction.reply({ content: "吔蕉啦你🍌", ephemeral: true });
+      }
     } finally {
-      await browser.close();
+      if (browser) {
+        try {
+          await browser.close();
+        } catch (_) {}
+      }
     }
   },
 };
