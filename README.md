@@ -47,12 +47,12 @@ First, install Docker. Both a Dockerfile and a docker-compose.yml file are inclu
   cd dizzybot
   ```
 
-2.	Install dependencies:
+2. Install dependencies:
   ```bash
   npm install
   ```
 
-3.	Create a .env file (see Docker setup section for keys).
+3. Create a .env file (see Docker setup section for keys).
    
 4. Start the bot:
    ```bash
