@@ -3,7 +3,6 @@
 Create a `.env` file in the project root with the following keys:
 
 ```
-.env 
 TOKEN=your_bot_token_here
 CLIENT_ID=your_client_id_here
 WEATHER_CHANNEL_ID=channel_id_here
