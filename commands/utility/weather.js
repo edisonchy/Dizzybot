@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  AttachmentBuilder,
+} = require("discord.js");
 const puppeteer = require("puppeteer");
 
 const LOCATIONS = {
@@ -34,7 +38,7 @@ module.exports = {
 
   async execute(interaction) {
     if (!interaction.guild) {
-      await interaction.reply("吔蕉啦你🍌");
+      await interaction.reply({ content: "吔蕉啦你🍌", ephemeral: true });
       return;
     }
 
@@ -56,7 +60,6 @@ module.exports = {
           "--single-process",
           "--no-zygote",
         ],
-        executablePath: puppeteer.executablePath(),
       });
 
       const page = await browser.newPage();
@@ -69,9 +72,8 @@ module.exports = {
       });
 
       // Take screenshot directly to buffer (no temp files)
-      const pngBuffer = await page.screenshot({ type: "png" });
-
-      const file = new AttachmentBuilder(pngBuffer, { name: "weather.png" });
+      const base64 = await page.screenshot({ type: "png", encoding: "base64" });
+      const pngBuffer = Buffer.from(base64, "base64");
 
       const embed = new EmbedBuilder()
         .setTitle("Windy 天氣報告")
@@ -79,7 +81,10 @@ module.exports = {
         .setImage("attachment://weather.png")
         .setColor(0xffffff);
 
-      await interaction.editReply({ embeds: [embed], files: [file] });
+      await interaction.editReply({
+        embeds: [embed],
+        files: [{ attachment: pngBuffer, name: "weather.png" }],
+      });
     } catch (e) {
       console.error("[/weather] error:", e);
       if (interaction.deferred || interaction.replied) {

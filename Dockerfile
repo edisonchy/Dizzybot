@@ -1,12 +1,9 @@
-FROM ghcr.io/puppeteer/puppeteer:19.7.2
+FROM canardconfit/puppeteer-docker:puppeteer-23.10.1-arm64
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-
-WORKDIR /usr/src/app
-
+WORKDIR /home/pptruser/app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 COPY . .
-CMD [ "node", "index.js" ]
 
+ENV NODE_ENV=production
+CMD ["node", "index.js"]
