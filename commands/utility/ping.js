@@ -6,10 +6,10 @@ module.exports = {
     .setDescription("Replies with Pong!"),
   async execute(interaction) {
     if (!interaction.guild) {
-      await interaction.reply("吔蕉啦你🍌");
+      await interaction.reply({ content: "吔蕉啦你🍌", ephemeral: true });
       return;
     }
 
-    await interaction.reply("Pong!");
+    await interaction.reply("Ping你老味");
   },
 };
