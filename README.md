@@ -7,25 +7,17 @@ A Discord.js application designed to make positive changes and streamline the ex
 
 <img width="2880" height="1800" alt="Screenshot 2025-08-09 at 2 30 08 PM psd" src="https://github.com/user-attachments/assets/26895476-f6b9-49d7-8025-ce7d68489cdd" />
 
---
-
 ## Main Feature 
 By using a cron job from `node-cron`, the application captures weather forecast data from Windy.com and sends it to a specific Discord channel every Friday at 8:00 AM.
-
---
 
 ## Other Features
 - A welcome button that automatically follows several thread channels for new users.
 - Informative embeds to help members better understand community logistics.
 
---
-
 ## Prerequisites
 - Node.js 18+
 - Docker & Docker Compose
 - A Discord bot token from the [Discord Developer Portal](https://discord.com/developers/applications)
-
----
 
 ## Setup with Docker
 This application is designed to be hosted with Docker on an **ARM64** system.  
@@ -47,8 +39,6 @@ First, install Docker. Both a Dockerfile and a docker-compose.yml file are inclu
    ```bash
    docker compose up -d
    ```
-
----
 
 ## Local Development Setup
 1.	Clone the repository:
