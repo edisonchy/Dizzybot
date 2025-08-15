@@ -3,7 +3,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 ![Discord.js](https://img.shields.io/badge/Discord.js-v14-blueviolet)
 
-A Discord.js application designed to make positive changes and streamline the experience of a longboarding Discord community.
+A Discord.js application designed to streamline the experience of a longboarding Discord community.
 
 <img width="720" height="450" alt="Dizzybot Screenshot" src="https://github.com/user-attachments/assets/26895476-f6b9-49d7-8025-ce7d68489cdd" />
 
