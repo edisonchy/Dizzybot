@@ -1,7 +1,7 @@
 # Dizzybot
 *A Discord.js application designed to streamline the experience of a longboarding Discord community.*
 
-Dizzybot helps keep an online community **organized, informed, and engaged**.  
+Dizzybot helps keep an online community **organised, informed, and engaged**.  
 It posts scheduled weather forecasts, guides newcomers, and shares key information to **support better decision-making**.
 
 ## Demo  
