@@ -48,7 +48,7 @@ GREEN_BUTTON_ROLE_ID=role_id_here
 docker compose up -d
 ```
 
-## Local Development
+## Local Deployment
 
 1. Clone the repository:  
 ```bash
